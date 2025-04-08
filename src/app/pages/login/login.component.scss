@@ -1,0 +1,150 @@
+// Variables
+$primary-color: #64639C;
+$secondary-color: #9B9C63;
+$card-bg-color: #ffffff;
+$text-color: #333333;
+$shadow-color: rgba(0, 0, 0, 0.15);
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px); // Account for navbar height
+  padding: 1rem;
+  background-color: #f5f5f5;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px $shadow-color;
+
+  mat-card-header {
+    background-color: $primary-color;
+    color: white;
+    padding: 1.5rem 1.5rem 1rem;
+
+    mat-card-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    mat-card-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+    }
+  }
+
+  mat-card-content {
+    padding: 1rem;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+
+    .form-field {
+      width: 100%;
+      margin-bottom: 1rem;
+
+      mat-icon {
+        color: $primary-color;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 0.5rem 0 1rem;
+
+      mat-checkbox {
+        font-size: 0.9rem;
+      }
+
+      .forgot-password {
+        color: $primary-color;
+        font-size: 0.9rem;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem 1.5rem;
+    gap: 1rem;
+
+    .login-button {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      background-color: $primary-color;
+
+      mat-icon {
+        margin-right: 0.5rem;
+      }
+    }
+
+    .register-prompt {
+      text-align: center;
+      font-size: 0.9rem;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Tablet styles
+@media (min-width: $breakpoint-tablet) {
+  .login-card {
+    mat-card-content {
+      padding: 1.5rem;
+    }
+
+    .login-form {
+      .form-actions {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}
+
+// Desktop styles
+@media (min-width: $breakpoint-desktop) {
+  .login-container {
+
+  }
+
+  .login-card {
+    box-shadow: 0 8px 24px $shadow-color;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
