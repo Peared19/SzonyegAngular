@@ -1,1 +1,63 @@
-<p>register works!</p>
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+      <mat-card-subtitle>Create a new account to get started</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="register-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput autocomplete="given-name"/>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>Enter your first name</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput autocomplete="family-name"/>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-hint>Enter your last name</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput autocomplete="email"/>
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-hint>Enter a valid email address</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput autocomplete="new-password"/>
+          <mat-icon matSuffix>lock</mat-icon>
+          <mat-hint>Use 8+ characters with a mix of letters, numbers & symbols</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Confirm Password</mat-label>
+          <input type="password" matInput autocomplete="new-password"/>
+          <mat-icon matSuffix>lock_check</mat-icon>
+          <mat-hint>Repeat your password</mat-hint>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <mat-checkbox>I agree to the Terms of Service and Privacy Policy</mat-checkbox>
+        </div>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" class="register-button">
+        <mat-icon>person_add</mat-icon>
+        Create Account
+      </button>
+      <div class="login-prompt">
+        Already have an account? <a (click)="callMenuMethod()">Log In</a>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MenuService} from '../../shared/menu/menu.service';
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class LoginComponent {
   @Output()  selectedPage: EventEmitter<string> = new EventEmitter();
 
-  setPage(page: string): void {
+  constructor(private menuService: MenuService) {}
 
-    this.selectedPage.emit(page);
+  callMenuMethod() {
+    this.menuService.triggerAction('setPage:register');
   }
 }
