@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+    ☰ Menu
+  </button>
+
+
+  <menu [class.open]="isMenuOpen">
+
+    <li><a (click)="setPage('home')">Home</a></li>
+    <li><a (click)="setPage('carpets')">Carpets</a></li>
+    <li><a (click)="setPage('register')">Register</a></li>
+    <li><a (click)="setPage('login')">Login</a></li>
+    <li><a (click)="setPage('profile')">Profile</a></li>
+  </menu>
+
+  <div class="navbar-actions">
+
+  </div>
+</nav>

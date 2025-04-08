@@ -1,0 +1,109 @@
+// Variables
+$primary-color: #1e1e2f;
+$text-color: #fff;
+$hover-color: rgba(255, 255, 255, 0.1);
+$transition-speed: 0.3s;
+$breakpoint-tablet: 768px;
+
+// Mobile-first styles
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: $primary-color;
+  color: $text-color;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: $text-color;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+
+    &:hover, &:focus {
+      background-color: $hover-color;
+      outline: none;
+    }
+  }
+
+  menu {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $transition-speed ease;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $primary-color;
+    z-index: 100;
+
+    &.open {
+      max-height: 300px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    li {
+      width: 100%;
+
+      a {
+        display: block;
+        color: $text-color;
+        text-decoration: none;
+        padding: 1rem;
+        cursor: pointer;
+        transition: background-color $transition-speed ease;
+
+        &:hover, &:focus {
+          background-color: $hover-color;
+        }
+      }
+    }
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// Tablet and desktop styles
+@media (min-width: $breakpoint-tablet) {
+  .navbar {
+    padding: 0.75rem 2rem;
+
+    .menu-toggle {
+      display: none;
+    }
+
+    menu {
+      position: static;
+      flex-direction: row;
+      width: auto;
+      max-height: none;
+      overflow: visible;
+      display: flex;
+      gap: 1rem;
+
+      li {
+        width: auto;
+
+        a {
+          padding: 0.5rem 0.75rem;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
