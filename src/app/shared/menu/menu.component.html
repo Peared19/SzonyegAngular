@@ -1,41 +1,62 @@
-<nav class="navbar">
+<mat-toolbar color="primary" class="navbar">
   <button mat-icon-button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
     <mat-icon>menu</mat-icon>
   </button>
 
-  <menu [class.open]="isMenuOpen">
-    <li>
-      <a mat-raised-button color="primary" (click)="setPage('home')">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-      </a>
-    </li>
-    <li>
-      <a mat-raised-button color="primary" (click)="setPage('carpets')">
-        <mat-icon>dashboard</mat-icon>
-        <span>Carpets</span>
-      </a>
-    </li>
-    <li>
-      <a mat-raised-button color="primary" (click)="setPage('register')">
-        <mat-icon>person_add</mat-icon>
-        <span>Register</span>
-      </a>
-    </li>
-    <li>
-      <a mat-raised-button color="primary" (click)="setPage('login')">
-        <mat-icon>login</mat-icon>
-        <span>Login</span>
-      </a>
-    </li>
-    <li>
-      <a mat-raised-button color="primary" (click)="setPage('profile')">
-        <mat-icon>account_circle</mat-icon>
-        <span>Profile</span>
-      </a>
-    </li>
-  </menu>
+  <span class="navbar-title">Carpet Store</span>
+
+  <div class="navbar-spacer"></div>
+
+  <div class="desktop-nav">
+    <a mat-button [class.active]="currentPage === 'home'" (click)="setPage('home')">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    <a mat-button [class.active]="currentPage === 'carpets'" (click)="setPage('carpets')">
+      <mat-icon>dashboard</mat-icon>
+      <span>Carpets</span>
+    </a>
+    <a mat-button [class.active]="currentPage === 'register'" (click)="setPage('register')">
+      <mat-icon>person_add</mat-icon>
+      <span>Register</span>
+    </a>
+    <a mat-button [class.active]="currentPage === 'login'" (click)="setPage('login')">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </a>
+    <a mat-button [class.active]="currentPage === 'profile'" (click)="setPage('profile')">
+      <mat-icon>account_circle</mat-icon>
+      <span>Profile</span>
+    </a>
+  </div>
 
   <div class="navbar-actions">
+    <!-- Optional actions like cart, search, etc. -->
   </div>
-</nav>
+</mat-toolbar>
+
+<!-- Mobile navigation menu -->
+<div class="mobile-nav-container" [class.open]="isMenuOpen">
+  <mat-nav-list class="mobile-nav">
+    <a mat-list-item [class.active]="currentPage === 'home'" (click)="setPage('home')">
+      <mat-icon>home</mat-icon>
+      <span mat-line>Home</span>
+    </a>
+    <a mat-list-item [class.active]="currentPage === 'carpets'" (click)="setPage('carpets')">
+      <mat-icon>dashboard</mat-icon>
+      <span mat-line>Carpets</span>
+    </a>
+    <a mat-list-item [class.active]="currentPage === 'register'" (click)="setPage('register')">
+      <mat-icon>person_add</mat-icon>
+      <span mat-line>Register</span>
+    </a>
+    <a mat-list-item [class.active]="currentPage === 'login'" (click)="setPage('login')">
+      <mat-icon>login</mat-icon>
+      <span mat-line>Login</span>
+    </a>
+    <a mat-list-item [class.active]="currentPage === 'profile'" (click)="setPage('profile')">
+      <mat-icon>account_circle</mat-icon>
+      <span mat-line>Profile</span>
+    </a>
+  </mat-nav-list>
+</div>

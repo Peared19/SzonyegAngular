@@ -1,109 +1,132 @@
 // Variables
-$primary-color: #1e1e2f;
-$text-color: #fff;
-$hover-color: rgba(255, 255, 255, 0.1);
+$primary-color: #64639C;
+$secondary-color: #9B9C63;
+$hover-color: rgba(255, 255, 255, 0.15);
+$active-color: rgba(155, 156, 99, 0.3); // Based on the secondary color
 $transition-speed: 0.3s;
 $breakpoint-tablet: 768px;
 
-// Mobile-first styles
+// Navbar styles
 .navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  padding: 0 16px;
   background-color: $primary-color;
-  color: $text-color;
-  position: relative;
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .navbar-title {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    color: $secondary-color;
+  }
+
+  .navbar-spacer {
+    flex: 1 1 auto;
+  }
 
   .menu-toggle {
     display: block;
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: $text-color;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 4px;
-
-    &:hover, &:focus {
-      background-color: $hover-color;
-      outline: none;
-    }
   }
 
-  menu {
-    flex-direction: column;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height $transition-speed ease;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: $primary-color;
-    z-index: 100;
+  .desktop-nav {
+    display: none;
 
-    &.open {
-      max-height: 300px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+    a {
+      margin: 0 4px;
+      color: $secondary-color;
+      transition: background-color $transition-speed ease;
 
-    li {
-      width: 100%;
+      mat-icon {
+        margin-right: 8px;
+      }
 
-      a {
-        display: block;
-        color: $text-color;
-        text-decoration: none;
-        padding: 1rem;
-        cursor: pointer;
-        transition: background-color $transition-speed ease;
+      &:hover {
+        background-color: $hover-color;
+      }
 
-        &:hover, &:focus {
-          background-color: $hover-color;
-        }
+      &.active {
+        background-color: $active-color;
+        font-weight: 500;
+        border-bottom: 2px solid $secondary-color;
       }
     }
   }
+}
 
-  .navbar-actions {
-    display: flex;
-    align-items: center;
+// Mobile navigation menu
+.mobile-nav-container {
+  position: fixed;
+  top: 64px; // Height of toolbar
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity $transition-speed ease;
+
+  &.open {
+    opacity: 1;
+    pointer-events: all;
+
+    .mobile-nav {
+      transform: translateX(0);
+    }
+  }
+
+  .mobile-nav {
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    background-color: $primary-color;
+    transform: translateX(-100%);
+    transition: transform $transition-speed ease;
+    overflow-y: auto;
+
+    a {
+      border-bottom: 1px solid rgba(115, 113, 113, 0.08);
+      color: $secondary-color;
+      transition: background-color $transition-speed ease;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+
+      &.active {
+        background-color: $active-color;
+        border-left: 4px solid $secondary-color;
+      }
+    }
   }
 }
 
 // Tablet and desktop styles
 @media (min-width: $breakpoint-tablet) {
   .navbar {
-    padding: 0.75rem 2rem;
-
     .menu-toggle {
       display: none;
     }
 
-    menu {
-      position: static;
-      flex-direction: row;
-      width: auto;
-      max-height: none;
-      overflow: visible;
+    .desktop-nav {
       display: flex;
-      gap: 1rem;
-
-      li {
-        width: auto;
-
-        a {
-          padding: 0.5rem 0.75rem;
-          border-radius: 6px;
-        }
-      }
+      align-items: center;
     }
   }
+
+  .mobile-nav-container {
+    display: none;
+  }
+}
+
+// Add padding to the body to account for fixed navbar
+:host {
+  display: block;
+}
+
+::ng-deep body {
+  padding-top: 64px;
 }
