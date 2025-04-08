@@ -1,19 +1,41 @@
 <nav class="navbar">
-  <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
-    ☰ Menu
+  <button mat-icon-button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+    <mat-icon>menu</mat-icon>
   </button>
 
-
   <menu [class.open]="isMenuOpen">
-
-    <li><a (click)="setPage('home')">Home</a></li>
-    <li><a (click)="setPage('carpets')">Carpets</a></li>
-    <li><a (click)="setPage('register')">Register</a></li>
-    <li><a (click)="setPage('login')">Login</a></li>
-    <li><a (click)="setPage('profile')">Profile</a></li>
+    <li>
+      <a mat-raised-button color="primary" (click)="setPage('home')">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a mat-raised-button color="primary" (click)="setPage('carpets')">
+        <mat-icon>dashboard</mat-icon>
+        <span>Carpets</span>
+      </a>
+    </li>
+    <li>
+      <a mat-raised-button color="primary" (click)="setPage('register')">
+        <mat-icon>person_add</mat-icon>
+        <span>Register</span>
+      </a>
+    </li>
+    <li>
+      <a mat-raised-button color="primary" (click)="setPage('login')">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+    </li>
+    <li>
+      <a mat-raised-button color="primary" (click)="setPage('profile')">
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile</span>
+      </a>
+    </li>
   </menu>
 
   <div class="navbar-actions">
-
   </div>
 </nav>
