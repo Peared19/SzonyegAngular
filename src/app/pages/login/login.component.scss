@@ -1,9 +1,12 @@
-// Variables
-$primary-color: #64639C;
-$secondary-color: #9B9C63;
-$card-bg-color: #ffffff;
-$text-color: #333333;
-$shadow-color: rgba(0, 0, 0, 0.15);
+// Variables - Using the carpet website color scheme
+$primary-color: #B45F06; // Rich Terracotta - for branding elements
+$secondary-color: #E7C9A9; // Desert Sand - for backgrounds and accents
+$accent-color: #5C614E; // Deep Olive Green - for buttons and borders
+$text-dark: #2E2E2E; // Charcoal - for main text
+$text-light: #FAF3E0; // Antique White - for text on dark backgrounds
+$highlight-color: #C79F59; // Burnt Gold - for hover states and highlights
+$background-color: #F9F6F1; // Warm Ivory - main background
+$shadow-color: rgba(180, 95, 6, 0.3); // Shadow based on primary color
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1024px;
 
@@ -12,37 +15,83 @@ $breakpoint-desktop: 1024px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh); // Account for navbar height
-  padding: 1rem;
-  background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
+  min-height: calc(100vh);
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, $background-color, $secondary-color);
+  position: relative;
+  overflow: hidden;
+  
+  // Add decorative pattern elements
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: rgba($highlight-color, 0.05);
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  &::before {
+    top: -100px;
+    left: -100px;
+    transform: scale(2);
+  }
+  
+  &::after {
+    bottom: -100px;
+    right: -100px;
+    transform: scale(1.5);
+  }
 }
 
 .login-card {
   width: 100%;
   max-width: 450px;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px $shadow-color;
-  background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
+  box-shadow: 0 10px 30px rgba($primary-color, 0.2), 0 1px 8px rgba(0,0,0,0.05);
+  background-color: $background-color;
+  position: relative;
+  z-index: 1;
+  border: none;
 
   mat-card-header {
     background-color: $primary-color;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 1.5rem 1.5rem 1rem;
+    color: $text-light;
+    padding: 2rem;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    overflow: hidden;
+    
+    // Add subtle pattern to header
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 60%);
+    }
 
     mat-card-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
     mat-card-subtitle {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
+      color: rgba(250, 243, 224, 0.9);
+      font-size: 1rem;
+      line-height: 1.4;
+      max-width: 80%;
     }
   }
 
   mat-card-content {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .login-form {
@@ -51,8 +100,42 @@ $breakpoint-desktop: 1024px;
 
     .form-field {
       width: 100%;
-      margin-bottom: 1rem;
-
+      margin-bottom: 1.5rem;
+      
+      // Clean, blocky input styles with current colors
+      ::ng-deep .mat-mdc-form-field-flex {
+        background-color: transparent;
+      }
+      
+      ::ng-deep .mat-mdc-text-field-wrapper {
+        background-color: rgba($secondary-color, 0.15);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: rgba($secondary-color, 0.25);
+        }
+      }
+      
+      ::ng-deep .mat-mdc-form-field-focus-overlay {
+        background-color: rgba($highlight-color, 0.05);
+      }
+      
+      // Make the outline rectangular but with slight rounding
+      ::ng-deep .mdc-notched-outline {
+        &__leading,
+        &__notch,
+        &__trailing {
+          border-radius: 4px;
+          border-color: rgba($secondary-color, 0.6) !important;
+        }
+      }
+      
+      // Input padding
+      ::ng-deep .mat-mdc-form-field-infix {
+        padding: 12px 0;
+      }
+      
       mat-icon {
         color: $primary-color;
       }
@@ -61,21 +144,51 @@ $breakpoint-desktop: 1024px;
     .form-actions {
       display: flex;
       flex-direction: column;
-      margin: 0.5rem 0 1rem;
-      gap: 0.75rem;
+      margin: 0.5rem 0 1.5rem;
+      gap: 1rem;
 
       mat-checkbox {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        
+        ::ng-deep .mdc-checkbox__background {
+          border-color: $accent-color !important;
+          border-radius: 4px;
+        }
+        
+        ::ng-deep .mdc-checkbox__ripple {
+          background-color: rgba(92, 97, 78, 0.1) !important;
+          border-radius: 4px;
+        }
       }
 
       .forgot-password {
-        color: $primary-color;
-        font-size: 0.9rem;
+        color: $accent-color;
+        font-size: 0.95rem;
         text-decoration: none;
         cursor: pointer;
+        position: relative;
+        padding-bottom: 2px;
+        display: inline-block;
+        
+        // Add animated underline on hover
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 2px;
+          background-color: $highlight-color;
+          transition: width 0.3s ease;
+        }
 
         &:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          color: $highlight-color;
+          
+          &::after {
+            width: 100%;
+          }
         }
       }
     }
@@ -84,32 +197,67 @@ $breakpoint-desktop: 1024px;
   mat-card-actions {
     display: flex;
     flex-direction: column;
-    padding: 1rem 1.5rem 1.5rem;
-    gap: 1rem;
+    padding: 0 2rem 2rem;
+    gap: 1.5rem;
 
     .login-button {
       width: 100%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      background-color: $primary-color;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      background-color: $accent-color;
+      color: $text-light;
+      box-shadow: 0 6px 12px rgba(92, 97, 78, 0.2);
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+
+      &:hover {
+        background-color: $highlight-color;
+        box-shadow: 0 8px 20px rgba(199, 159, 89, 0.3);
+        transform: translateY(-2px);
+      }
 
       mat-icon {
         margin-right: 0.5rem;
+        font-size: 1.25rem;
       }
     }
 
     .register-prompt {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      color: $text-dark;
+      margin-top: 0.5rem;
 
       a {
-        color: $primary-color;
+        color: $accent-color;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
+        position: relative;
+        padding-bottom: 2px;
+        
+        // Add animated underline on hover
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          height: 2px;
+          background-color: $highlight-color;
+          transition: width 0.3s ease;
+        }
 
         &:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          color: $highlight-color;
+          
+          &::after {
+            width: 100%;
+          }
         }
       }
     }
@@ -120,7 +268,7 @@ $breakpoint-desktop: 1024px;
 @media (min-width: $breakpoint-tablet) {
   .login-card {
     mat-card-content {
-      padding: 1.5rem;
+      padding: 2.5rem;
     }
 
     .login-form {
@@ -130,23 +278,27 @@ $breakpoint-desktop: 1024px;
         align-items: center;
       }
     }
+    
+    mat-card-actions {
+      padding: 0 2.5rem 2.5rem;
+    }
   }
 }
 
 // Desktop styles
 @media (min-width: $breakpoint-desktop) {
   .login-container {
-    background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
+    background: linear-gradient(135deg, $background-color, $secondary-color);
   }
 
   .login-card {
-    box-shadow: 0 8px 24px $shadow-color;
+    box-shadow: 0 15px 35px rgba($primary-color, 0.2), 0 5px 15px rgba(0,0,0,0.05);
     transform: translateY(0);
-    transition: transform 0.3s ease;
-    background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
       transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba($primary-color, 0.25), 0 10px 20px rgba(0,0,0,0.1);
     }
   }
 }
