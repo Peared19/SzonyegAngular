@@ -1,1 +1,62 @@
-<p>carpets works!</p>
+<div class="carpets-page">
+  <h1>Our Carpet Collection</h1>
+
+  <div class="filter-bar">
+    <!-- Search -->
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="searchQuery">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <!-- Type Filter -->
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="selectedType">
+        <mat-option value="">All Types</mat-option>
+        <mat-option *ngFor="let type of carpetTypes" [value]="type">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Stock Filter -->
+    <mat-checkbox [(ngModel)]="inStockOnly">In Stock Only</mat-checkbox>
+
+    <!-- Buttons -->
+    <div class="filter-buttons">
+      <button mat-raised-button color="primary" (click)="applyFilters()">Apply</button>
+      <button mat-button (click)="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- No Results Message -->
+  <div *ngIf="!loading && carpets.length === 0" class="no-results">
+    <mat-icon>search_off</mat-icon>
+    <p>No carpets found</p>
+  </div>
+
+  <!-- Carpet List -->
+  <div *ngIf="!loading && carpets.length > 0" class="carpet-grid">
+    <mat-card *ngFor="let carpet of carpets">
+      <img [src]="carpet.imageUrl" [alt]="carpet.name">
+      
+      <mat-card-content>
+        <h2>{{carpet.name}}</h2>
+        <p class="type">{{carpet.type}}</p>
+        <p class="description">{{carpet.description}}</p>
+        <p class="price">{{carpet.price | carpetPrice}}</p>
+        <p *ngIf="!carpet.inStock" class="out-of-stock">Out of Stock</p>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!carpet.inStock">
+          <mat-icon>shopping_cart</mat-icon> Add to Cart
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
