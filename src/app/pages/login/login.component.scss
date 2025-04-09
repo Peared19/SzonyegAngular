@@ -12,9 +12,9 @@ $breakpoint-desktop: 1024px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh);
+  min-height: calc(100vh); // Account for navbar height
   padding: 1rem;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
 }
 
 .login-card {
@@ -23,10 +23,11 @@ $breakpoint-desktop: 1024px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px $shadow-color;
+  background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
 
   mat-card-header {
     background-color: $primary-color;
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     padding: 1.5rem 1.5rem 1rem;
 
     mat-card-title {
@@ -60,8 +61,8 @@ $breakpoint-desktop: 1024px;
     .form-actions {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
       margin: 0.5rem 0 1rem;
+      gap: 0.75rem;
 
       mat-checkbox {
         font-size: 0.9rem;
@@ -135,13 +136,14 @@ $breakpoint-desktop: 1024px;
 // Desktop styles
 @media (min-width: $breakpoint-desktop) {
   .login-container {
-
+    background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
   }
 
   .login-card {
     box-shadow: 0 8px 24px $shadow-color;
     transform: translateY(0);
     transition: transform 0.3s ease;
+    background: linear-gradient(135deg, lighten($primary-color, 30%), lighten($secondary-color, 30%));
 
     &:hover {
       transform: translateY(-5px);

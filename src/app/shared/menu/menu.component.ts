@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatLine } from '@angular/material/core';
 import { MenuService } from './menu.service'; // ✅ adjust if path differs
 import { Subscription } from 'rxjs';
+import {MatFormField} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +20,8 @@ import { Subscription } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatLine
+    MatLine,
+    MatFormField
   ]
 })
 export class MenuComponent implements OnInit, OnDestroy {
@@ -53,5 +55,13 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.currentPage = pagename;
     this.selectedPage.emit(pagename);
     this.isMenuOpen = false;
+  }
+  search(query: string): void {
+    if (query && query.trim()) {
+      console.log('Searching for:', query);
+      // Implement your search functionality here
+      // For example, navigate to search results page:
+      // this.router.navigate(['/search'], { queryParams: { q: query } });
+    }
   }
 }

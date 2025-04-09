@@ -28,6 +28,13 @@
       <mat-icon>account_circle</mat-icon>
       <span>Profile</span>
     </a>
+
+    <div class="search-wrapper">
+      <input type="text" placeholder="Search carpets..." #searchInput (keyup.enter)="search(searchInput.value)">
+      <button mat-icon-button (click)="search(searchInput.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
   </div>
 
   <div class="navbar-actions">
@@ -38,6 +45,13 @@
 <!-- Mobile navigation menu -->
 <div class="mobile-nav-container" [class.open]="isMenuOpen">
   <mat-nav-list class="mobile-nav">
+    <div class="mobile-search-wrapper">
+      <input type="text" placeholder="Search carpets..." #mobileSearchInput (keyup.enter)="search(mobileSearchInput.value)">
+      <button mat-icon-button (click)="search(mobileSearchInput.value)">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
     <a mat-list-item [class.active]="currentPage === 'home'" (click)="setPage('home')">
       <mat-icon>home</mat-icon>
       <span mat-line>Home</span>
