@@ -126,6 +126,7 @@ $breakpoint-tablet: 768px;
   pointer-events: none;
   opacity: 0;
   transition: opacity $transition-speed ease;
+  color: $text-light;
 
   &.open {
     opacity: 1;
@@ -137,6 +138,7 @@ $breakpoint-tablet: 768px;
   }
 
   .mobile-nav {
+    color: $text-light;
     width: 80%;
     max-width: 300px;
     height: 100%;
@@ -145,6 +147,16 @@ $breakpoint-tablet: 768px;
     transition: transform $transition-speed ease;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+
+    // Added explicit color styling for all text elements in mobile nav
+    * {
+      color: $text-light;
+    }
+
+    // Make sure all icons use the correct color
+    mat-icon {
+      color: $text-light;
+    }
 
     .mobile-search-wrapper {
       display: flex;
@@ -181,13 +193,14 @@ $breakpoint-tablet: 768px;
           line-height: 18px;
           height: 18px;
           width: 18px;
+          color: $text-light; // Explicitly set icon color
         }
       }
     }
 
     a {
       border-bottom: 1px solid rgba(250, 243, 224, 0.15); // Lighter border for contrast
-      color: $text-light; // Updated to light text for dark background
+      color: $text-light !important; // Updated to light text with important flag
       transition: background-color $transition-speed ease;
       padding: 14px 16px; // Added more padding for better touch targets
 
@@ -203,7 +216,13 @@ $breakpoint-tablet: 768px;
       mat-icon {
         margin-right: 16px;
         vertical-align: middle;
+        color: $text-light; // Explicitly set icon color
       }
+    }
+
+    // Logo text specific styling if needed
+    .navbar-title, .logo-text {
+      color: $text-light;
     }
   }
 }
@@ -224,7 +243,11 @@ $breakpoint-tablet: 768px;
     display: none;
   }
 }
+#logo{
+  height: 100px;
+  width: 100px;
 
+}
 // Add padding to the body to account for fixed navbar
 :host {
   display: block;
