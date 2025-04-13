@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
+@use 'sass:color';
 
 // Include the common styles for Angular Material
 @include mat.core();
@@ -90,7 +91,7 @@ body {
 }
 
 .mat-mdc-raised-button.mat-accent:hover {
-  background-color: lighten($accent-color, 10%) !important;
+  background-color: color.adjust($accent-color, $lightness: 10%) !important;
 }
 
 // Add a subtle shadow effect to buttons

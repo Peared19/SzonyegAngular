@@ -5,9 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatLine } from '@angular/material/core';
-import { MenuService } from './menu.service'; // ✅ adjust if path differs
+import { MenuService } from './menu.service';
 import { Subscription } from 'rxjs';
-import {MatFormField} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-menu',
@@ -20,8 +19,7 @@ import {MatFormField} from '@angular/material/form-field';
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatLine,
-    MatFormField
+    MatLine
   ]
 })
 export class MenuComponent implements OnInit, OnDestroy {
