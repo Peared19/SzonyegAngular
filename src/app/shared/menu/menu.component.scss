@@ -1,17 +1,15 @@
-// Variables - Using the carpet website color scheme
-$primary-color: #B45F06; // Rich Terracotta - for branding elements
-$secondary-color: #E7C9A9; // Desert Sand - for backgrounds and accents
-$accent-color: #5C614E; // Deep Olive Green - for buttons and borders
-$text-dark: #2E2E2E; // Charcoal - for main text
-$text-light: #FAF3E0; // Antique White - for text on dark backgrounds
-$highlight-color: #C79F59; // Burnt Gold - for hover states and highlights
-$background-color: #F9F6F1; // Warm Ivory - main background
-$hover-color: rgba(199, 159, 89, 0.15); // Burnt gold for hover states (lighter)
-$active-color: rgba(231, 201, 169, 0.25); // Desert sand for active states
+$primary-color: #B45F06;
+$secondary-color: #E7C9A9;
+$accent-color: #5C614E;
+$text-dark: #2E2E2E;
+$text-light: #FAF3E0;
+$highlight-color: #C79F59;
+$background-color: #F9F6F1;
+$hover-color: rgba(199, 159, 89, 0.15);
+$active-color: rgba(231, 201, 169, 0.25);
 $transition-speed: 0.3s;
 $breakpoint-tablet: 768px;
 
-// Navbar styles
 .navbar {
   position: fixed;
   top: 0;
@@ -20,13 +18,13 @@ $breakpoint-tablet: 768px;
   z-index: 1000;
   height: 64px;
   padding: 0 16px;
-  background-color: $primary-color; // Rich Terracotta for branding header
+  background-color: $primary-color;
   box-shadow: 0 2px 10px rgba(180, 95, 6, 0.3);
 
   .navbar-title {
     margin-left: 8px;
     font-size: 1.2rem;
-    color: $text-light; // Antique white for text on dark background
+    color: $text-light;
     font-weight: 500;
   }
 
@@ -36,7 +34,11 @@ $breakpoint-tablet: 768px;
 
   .menu-toggle {
     display: block;
-    color: $text-light; // Antique white for text on dark background
+    color: $text-light;
+
+    mat-icon {
+      color: $text-light;
+    }
   }
 
   .desktop-nav {
@@ -45,7 +47,7 @@ $breakpoint-tablet: 768px;
 
     a {
       margin: 0 4px;
-      color: $text-light; // Antique white for text on dark background
+      color: $text-light;
       transition: all $transition-speed ease;
       border-radius: 4px;
 
@@ -54,12 +56,12 @@ $breakpoint-tablet: 768px;
       }
 
       &:hover {
-        background-color: $highlight-color; // Burnt gold for hover states
+        background-color: $highlight-color;
         transform: translateY(-2px);
       }
 
       &.active {
-        background-color: $active-color; // Desert sand for active states
+        background-color: $active-color;
         font-weight: 500;
         border-bottom: 2px solid $text-light;
       }
@@ -71,7 +73,7 @@ $breakpoint-tablet: 768px;
       height: 36px;
       margin-left: 8px;
       border-radius: 18px;
-      background-color: rgba(250, 243, 224, 0.15); // Slightly transparent antique white
+      background-color: rgba(250, 243, 224, 0.15);
       overflow: hidden;
       transition: all $transition-speed ease;
       border: 1px solid rgba(250, 243, 224, 0.2);
@@ -82,12 +84,12 @@ $breakpoint-tablet: 768px;
         padding: 0 12px;
         border: none;
         background: transparent;
-        color: $text-light; // Antique white for text on dark background
+        color: $text-light;
         font-size: 14px;
         outline: none;
 
         &::placeholder {
-          color: rgba(250, 243, 224, 0.6); // Semi-transparent antique white
+          color: rgba(250, 243, 224, 0.6);
         }
       }
 
@@ -95,7 +97,7 @@ $breakpoint-tablet: 768px;
         height: 36px;
         width: 36px;
         line-height: 36px;
-        color: $text-light; // Antique white for text on dark background
+        color: $text-light;
 
         mat-icon {
           font-size: 18px;
@@ -107,17 +109,16 @@ $breakpoint-tablet: 768px;
       }
 
       &:hover {
-        background-color: rgba(250, 243, 224, 0.25); // More opaque antique white on hover
+        background-color: rgba(250, 243, 224, 0.25);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
     }
   }
 }
 
-// Mobile navigation menu
 .mobile-nav-container {
   position: fixed;
-  top: 64px; // Height of toolbar
+  top: 64px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -142,18 +143,16 @@ $breakpoint-tablet: 768px;
     width: 80%;
     max-width: 300px;
     height: 100%;
-    background-color: $primary-color; // Changed to primary color (Rich Terracotta)
+    background-color: $primary-color;
     transform: translateX(-100%);
     transition: transform $transition-speed ease;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 
-    // Added explicit color styling for all text elements in mobile nav
     * {
       color: $text-light;
     }
 
-    // Make sure all icons use the correct color
     mat-icon {
       color: $text-light;
     }
@@ -164,7 +163,7 @@ $breakpoint-tablet: 768px;
       margin: 16px;
       height: 40px;
       border-radius: 20px;
-      background-color: rgba(250, 243, 224, 0.15); // Semi-transparent light color
+      background-color: rgba(250, 243, 224, 0.15);
       overflow: hidden;
       border: 1px solid rgba(250, 243, 224, 0.2);
 
@@ -174,60 +173,58 @@ $breakpoint-tablet: 768px;
         padding: 0 12px;
         border: none;
         background: transparent;
-        color: $text-light; // Updated to light text for dark background
+        color: $text-light;
         font-size: 14px;
         outline: none;
 
         &::placeholder {
-          color: rgba(250, 243, 224, 0.6); // Semi-transparent light color
+          color: rgba(250, 243, 224, 0.6);
         }
       }
 
       button {
         height: 40px;
         width: 40px;
-        color: $text-light; // Updated for better contrast
+        color: $text-light;
 
         mat-icon {
           font-size: 18px;
           line-height: 18px;
           height: 18px;
           width: 18px;
-          color: $text-light; // Explicitly set icon color
+          color: $text-light;
         }
       }
     }
 
     a {
-      border-bottom: 1px solid rgba(250, 243, 224, 0.15); // Lighter border for contrast
-      color: $text-light !important; // Updated to light text with important flag
+      border-bottom: 1px solid rgba(250, 243, 224, 0.15);
+      color: $text-light !important;
       transition: background-color $transition-speed ease;
-      padding: 14px 16px; // Added more padding for better touch targets
+      padding: 14px 16px;
 
       &:hover {
-        background-color: $highlight-color; // Burnt gold for hover states
+        background-color: $highlight-color;
       }
 
       &.active {
-        background-color: rgba(250, 243, 224, 0.15); // Lighter active state for contrast
-        border-left: 4px solid $highlight-color; // Changed to highlight for better visibility
+        background-color: rgba(250, 243, 224, 0.15);
+        border-left: 4px solid $highlight-color;
       }
 
       mat-icon {
         margin-right: 16px;
         vertical-align: middle;
-        color: $text-light; // Explicitly set icon color
+        color: $text-light;
       }
     }
 
-    // Logo text specific styling if needed
     .navbar-title, .logo-text {
       color: $text-light;
     }
   }
 }
 
-// Tablet and desktop styles
 @media (min-width: $breakpoint-tablet) {
   .navbar {
     .menu-toggle {
@@ -243,12 +240,12 @@ $breakpoint-tablet: 768px;
     display: none;
   }
 }
-#logo{
+
+#logo {
   height: 100px;
   width: 100px;
-
 }
-// Add padding to the body to account for fixed navbar
+
 :host {
   display: block;
 }
