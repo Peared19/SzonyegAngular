@@ -1,36 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use 'sass:color';
 
-// Include the common styles for Angular Material
 @include mat.core();
 
-// Define carpet website color scheme with SCSS variables
-$primary-color: #B45F06; // Rich Terracotta
-$secondary-color: #E7C9A9; // Desert Sand
-$accent-color: #5C614E; // Deep Olive Green
-$text-dark: #2E2E2E; // Charcoal
-$text-light: #FAF3E0; // Antique White
-$highlight-color: #C79F59; // Burnt Gold
-$background-color: #F9F6F1; // Warm Ivory
+$primary-color: #B45F06;
+$secondary-color: #E7C9A9;
+$accent-color: #5C614E;
+$text-dark: #2E2E2E;
+$text-light: #FAF3E0;
+$highlight-color: #C79F59;
+$background-color: #F9F6F1;
 
-// We'll skip the Angular Material theming and just use direct overrides
-
-// Global styles
-html, body { 
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
-  margin: 0; 
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   color: $text-dark;
   overflow-x: hidden;
 }
 
-// Create a fixed background container that sits behind all content
 .app-root-container {
   position: fixed;
   top: 0;
@@ -41,7 +34,6 @@ body {
   z-index: -1;
 }
 
-// Add decorative pattern elements to the background container
 .app-root-container::before, .app-root-container::after {
   content: '';
   position: absolute;
@@ -64,9 +56,8 @@ body {
   transform: scale(1.5);
 }
 
-// Make all content containers have a transparent background by default
-.mat-mdc-card, 
-.container, 
+.mat-mdc-card,
+.container,
 .content-container,
 .mat-drawer-container,
 .mat-sidenav-container {
@@ -75,7 +66,7 @@ body {
   z-index: 1;
 }
 
-// Additional global styles for carpet website theme
+// Gombok stílusai
 .mat-mdc-raised-button.mat-primary {
   background-color: $primary-color !important;
   color: $text-light !important;
@@ -94,7 +85,7 @@ body {
   background-color: color.adjust($accent-color, $lightness: 10%) !important;
 }
 
-// Add a subtle shadow effect to buttons
+// Gombok árnyék effektjei
 .mat-mdc-raised-button.mat-primary {
   box-shadow: 0 4px 12px rgba($primary-color, 0.3) !important;
 }
@@ -103,7 +94,6 @@ body {
   box-shadow: 0 6px 16px rgba($primary-color, 0.4) !important;
 }
 
-// Add shadow to accent buttons
 .mat-mdc-raised-button.mat-accent {
   box-shadow: 0 4px 12px rgba($accent-color, 0.3) !important;
 }
@@ -121,7 +111,6 @@ body {
   background-color: $primary-color !important;
 }
 
-// Links
 a {
   color: $accent-color;
   text-decoration: none;
@@ -132,7 +121,6 @@ a {
   }
 }
 
-// Custom scrollbar
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -150,13 +138,11 @@ a {
   background: $highlight-color;
 }
 
-// Card styling
 .mat-mdc-card {
   background-color: $background-color;
   border: 1px solid rgba($secondary-color, 0.5);
 }
 
-// Manual overrides for colors
 .mat-toolbar.mat-primary {
   background-color: $primary-color;
   color: $text-light;
@@ -167,7 +153,6 @@ a {
   color: $text-light;
 }
 
-// Form field styles
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: rgba($secondary-color, 0.1);
 }
@@ -184,7 +169,6 @@ a {
   color: $primary-color;
 }
 
-// Checkbox styles
 .mat-checkbox-checked.mat-primary .mat-checkbox-background {
   background-color: $primary-color;
 }
@@ -193,8 +177,7 @@ a {
   background-color: $accent-color;
 }
 
-// Radio button styles
-.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
   border-color: $primary-color;
 }
 
