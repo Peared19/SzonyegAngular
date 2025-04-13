@@ -6,7 +6,6 @@ import { Carpet } from '../models/carpet.model';
   providedIn: 'root'
 })
 export class CarpetService {
-
   private carpets: Carpet[] = [
     new Carpet({
       id: '1',
@@ -60,7 +59,7 @@ export class CarpetService {
     if (query.trim() !== '') {
       query = query.toLowerCase().trim();
       filtered = filtered.filter(carpet =>
-        carpet.name.toLowerCase().includes(query) ||
+        carpet.name.toLowerCase().includes(query) || 
         carpet.description.toLowerCase().includes(query)
       );
     }
@@ -76,5 +75,10 @@ export class CarpetService {
     }
 
     return of(filtered);
+  }
+
+  getCarpetById(id: string): Observable<Carpet | undefined> {
+    const carpet = this.carpets.find(c => c.id === id);
+    return of(carpet);
   }
 }

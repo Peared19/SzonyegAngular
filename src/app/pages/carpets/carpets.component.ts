@@ -44,15 +44,12 @@ export class CarpetsComponent implements OnInit {
   carpets: (Carpet & { comments?: Comment[], ratings?: Rating[], averageRating?: number })[] = [];
   loading = true;
   
-  // Fixed carpet types
   carpetTypes = ['Persian', 'Modern', 'Traditional', 'Oriental'];
   
-  // Filter options
   searchQuery = '';
   selectedType = '';
   inStockOnly = false;
 
-  // New comment form
   newComment = '';
   newRating = 0;
   
@@ -117,8 +114,8 @@ export class CarpetsComponent implements OnInit {
 
     this.feedbackService.addComment({
       carpetId: carpet.id,
-      userId: 'currentUser', // This will be replaced with actual user ID when auth is implemented
-      username: 'Current User', // This will be replaced with actual username when auth is implemented
+      userId: 'currentUser',
+      username: 'Current User',
       text: this.newComment
     }).subscribe(() => {
       this.newComment = '';
@@ -131,8 +128,8 @@ export class CarpetsComponent implements OnInit {
 
     this.feedbackService.addRating({
       carpetId: carpet.id,
-      userId: 'currentUser', // This will be replaced with actual user ID when auth is implemented
-      username: 'Current User', // This will be replaced with actual username when auth is implemented
+      userId: 'currentUser',
+      username: 'Current User',
       score: this.newRating
     }).subscribe(() => {
       this.newRating = 0;

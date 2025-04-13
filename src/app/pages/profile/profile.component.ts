@@ -37,18 +37,15 @@ export class ProfileComponent {
     role: 'user'
   });
 
-  // Password change form
   passwordForm = {
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   };
 
-  // Address update
   newAddress: string = this.user.address;
 
   updatePassword() {
-    // TODO: Implement password update logic
     if (this.passwordForm.newPassword !== this.passwordForm.confirmPassword) {
       alert('New passwords do not match!');
       return;
@@ -63,7 +60,6 @@ export class ProfileComponent {
   }
 
   updateAddress() {
-    // TODO: Implement address update logic
     console.log('Address update requested:', this.newAddress);
     this.user.address = this.newAddress;
   }

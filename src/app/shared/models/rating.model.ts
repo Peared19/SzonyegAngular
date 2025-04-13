@@ -1,6 +1,16 @@
 /**
  * ertekeles modell a szonyegekhez
  */
+export interface Rating {
+  id: string;
+  carpetId: string;
+  userId: string;
+  username: string;
+  score: number; // 1-5 stars
+  createdAt: Date;
+  formattedDate: string;
+}
+
 export class Rating {
   id: string;
   carpetId: string;

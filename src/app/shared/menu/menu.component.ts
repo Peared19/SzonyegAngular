@@ -30,9 +30,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private subscription!: Subscription;
 
-  constructor(private menuService: MenuService) {
-    console.log('Hello konstruktor');
-  }
+  constructor(private menuService: MenuService) {}
 
   ngOnInit(): void {
     this.subscription = this.menuService.action$.subscribe(action => {
@@ -54,12 +52,10 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.selectedPage.emit(pagename);
     this.isMenuOpen = false;
   }
+
   search(query: string): void {
     if (query && query.trim()) {
       console.log('Searching for:', query);
-      // Implement your search functionality here
-      // For example, navigate to search results page:
-      // this.router.navigate(['/search'], { queryParams: { q: query } });
     }
   }
 }
