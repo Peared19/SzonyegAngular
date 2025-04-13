@@ -1,5 +1,5 @@
 /**
- * User model
+ * felhasznalo modell
  */
 export class User {
   id: string;

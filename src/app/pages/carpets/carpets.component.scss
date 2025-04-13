@@ -3,6 +3,7 @@ $primary: #B45F06;
 $accent: #5C614E;
 $error: #c62828;
 $background: white;
+$star-color: #ffd700;
 
 .carpets-page {
   max-width: 1200px;
@@ -105,6 +106,21 @@ $background: white;
         color: $error;
         font-weight: bold;
       }
+
+      .rating-summary {
+        margin: 0.5rem 0;
+        
+        .stars {
+          color: $star-color;
+          font-size: 1.2rem;
+        }
+        
+        .rating-count {
+          color: $accent;
+          font-size: 0.9rem;
+          margin-left: 0.5rem;
+        }
+      }
     }
     
     mat-card-actions {
@@ -114,5 +130,72 @@ $background: white;
         width: 100%;
       }
     }
+
+    mat-expansion-panel {
+      margin-top: 1rem;
+      
+      .add-rating,
+      .add-comment {
+        margin: 1rem 0;
+
+        h3 {
+          color: $accent;
+          margin-bottom: 1rem;
+        }
+
+        mat-form-field {
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+
+      .comments-list {
+        margin-top: 1rem;
+
+        h3 {
+          color: $accent;
+          margin-bottom: 1rem;
+        }
+
+        .comment {
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .comment-text {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+          }
+
+          .comment-meta {
+            font-size: 0.85rem;
+            color: $accent;
+
+            span {
+              font-style: italic;
+            }
+          }
+        }
+      }
+
+      .no-comments {
+        text-align: center;
+        color: $accent;
+        font-style: italic;
+        margin: 1rem 0;
+      }
+    }
   }
+}
+
+mat-divider {
+  margin: 1rem 0;
 }

@@ -50,6 +50,14 @@
         <p class="description">{{carpet.description}}</p>
         <p class="price">{{carpet.price | carpetPrice}}</p>
         <p *ngIf="!carpet.inStock" class="out-of-stock">Out of Stock</p>
+
+        <!-- Rating Summary -->
+        <div class="rating-summary" *ngIf="carpet.averageRating">
+          <span class="stars">{{getStars(carpet.averageRating)}}</span>
+          <span class="rating-count" *ngIf="carpet.ratings?.length">
+            ({{carpet.ratings?.length}} ratings)
+          </span>
+        </div>
       </mat-card-content>
       
       <mat-card-actions>
@@ -57,6 +65,59 @@
           <mat-icon>shopping_cart</mat-icon> Add to Cart
         </button>
       </mat-card-actions>
+
+      <!-- Feedback Section -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Reviews & Ratings
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Add Rating -->
+        <div class="add-rating">
+          <h3>Rate this carpet</h3>
+          <mat-form-field appearance="outline">
+            <mat-label>Rating (1-5 stars)</mat-label>
+            <input matInput type="number" min="1" max="5" [(ngModel)]="newRating">
+            <mat-hint>Enter a number between 1 and 5</mat-hint>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addRating(carpet)" [disabled]="newRating < 1 || newRating > 5">
+            Submit Rating
+          </button>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Add Comment -->
+        <div class="add-comment">
+          <h3>Add a comment</h3>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Your comment</mat-label>
+            <textarea matInput [(ngModel)]="newComment" rows="3"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addComment(carpet)" [disabled]="!newComment.trim()">
+            Submit Comment
+          </button>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Comments List -->
+        <div class="comments-list" *ngIf="carpet.comments?.length">
+          <h3>Comments</h3>
+          <div class="comment" *ngFor="let comment of carpet.comments">
+            <p class="comment-text">{{comment.text}}</p>
+            <p class="comment-meta">
+              By {{comment.username}} on {{comment.formattedDate}}
+              <span *ngIf="comment.isEdited">(edited)</span>
+            </p>
+          </div>
+        </div>
+        <p *ngIf="!carpet.comments?.length" class="no-comments">
+          No comments yet. Be the first to comment!
+        </p>
+      </mat-expansion-panel>
     </mat-card>
   </div>
 </div>

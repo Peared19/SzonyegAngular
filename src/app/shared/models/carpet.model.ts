@@ -1,5 +1,5 @@
 /**
- * Simple Carpet model
+ * szonyeg modell
  */
 export class Carpet {
   id: string;
