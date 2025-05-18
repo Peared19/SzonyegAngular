@@ -57,3 +57,15 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# Szőnyeg Webáruház
+
+## Adminisztrátori jogosultság szükséges új szőnyeg hozzáadásához
+
+Ha új szőnyeget szeretnél hozzáadni az oldalhoz, adminisztrátori jogosultságra van szükség.
+
+### Admin fiók adatai
+- **Email:** peared@gmail.com
+- **Jelszó:** peared
+
+Kérjük, jelentkezz be ezzel a fiókkal az admin funkciók eléréséhez.
