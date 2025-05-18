@@ -1,6 +1,6 @@
 
 # Szőnyeg Webáruház
-
+https://angular-szonyeg.web.app/
 ## Adminisztrátori jogosultság szükséges új szőnyeg hozzáadásához
 
 Ha új szőnyeget szeretnél hozzáadni az oldalhoz, adminisztrátori jogosultságra van szükség.
