@@ -1,0 +1,38 @@
+<div class="add-carpet-container">
+  <mat-card>
+    <mat-card-title>Add New Carpet</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="addCarpet()" #carpetForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="name" name="name" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" [(ngModel)]="price" name="price" required min="1" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Type</mat-label>
+          <input matInput [(ngModel)]="type" name="type" required />
+        </mat-form-field>
+
+        <div class="file-input-container">
+          <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+          <button mat-raised-button color="accent" (click)="fileInput.click()">Select Image</button>
+          <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="description" name="description" rows="3"></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="isLoading || !carpetForm.form.valid">
+          Add Carpet
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

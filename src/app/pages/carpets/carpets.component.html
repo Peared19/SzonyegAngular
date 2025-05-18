@@ -16,8 +16,6 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-checkbox [(ngModel)]="inStockOnly">In Stock Only</mat-checkbox>
-
     <div class="filter-buttons">
       <button mat-raised-button color="primary" (click)="applyFilters()">Apply</button>
       <button mat-button (click)="resetFilters()">Reset</button>
@@ -42,7 +40,6 @@
         <p class="type">{{carpet.type}}</p>
         <p class="description">{{carpet.description}}</p>
         <p class="price">{{carpet.price | carpetPrice}}</p>
-        <p *ngIf="!carpet.inStock" class="out-of-stock">Out of Stock</p>
 
         <div class="rating-summary" *ngIf="carpet.averageRating">
           <span class="stars">{{getStars(carpet.averageRating)}}</span>
@@ -53,7 +50,7 @@
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary" [disabled]="!carpet.inStock">
+        <button mat-raised-button color="primary" (click)="addToCart(carpet)">
           <mat-icon>shopping_cart</mat-icon> Add to Cart
         </button>
       </mat-card-actions>
@@ -65,32 +62,35 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <div class="add-rating">
-          <h3>Rate this carpet</h3>
-          <mat-form-field appearance="outline">
-            <mat-label>Rating (1-5 stars)</mat-label>
-            <input matInput type="number" min="1" max="5" [(ngModel)]="newRating">
-            <mat-hint>Enter a number between 1 and 5</mat-hint>
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="addRating(carpet)" [disabled]="newRating < 1 || newRating > 5">
-            Submit Rating
-          </button>
+        <div *ngIf="currentUser">
+          <div class="add-rating">
+            <h3>Rate this carpet</h3>
+            <mat-form-field appearance="outline">
+              <mat-label>Rating (1-5 stars)</mat-label>
+              <input matInput type="number" min="1" max="5" [(ngModel)]="newRating" [disabled]="carpet.hasUserRated === true">
+              <mat-hint>Enter a number between 1 and 5</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addRating(carpet)" [disabled]="newRating < 1 || newRating > 5 || carpet.hasUserRated === true">
+              Submit Rating
+            </button>
+            <p *ngIf="carpet.hasUserRated">You have already rated this carpet.</p>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="add-comment">
+            <h3>Add a comment</h3>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Your comment</mat-label>
+              <textarea matInput [(ngModel)]="newComment" rows="3"></textarea>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addComment(carpet)" [disabled]="!newComment.trim()">
+              Submit Comment
+            </button>
+          </div>
+
+          <mat-divider></mat-divider>
         </div>
-
-        <mat-divider></mat-divider>
-
-        <div class="add-comment">
-          <h3>Add a comment</h3>
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Your comment</mat-label>
-            <textarea matInput [(ngModel)]="newComment" rows="3"></textarea>
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="addComment(carpet)" [disabled]="!newComment.trim()">
-            Submit Comment
-          </button>
-        </div>
-
-        <mat-divider></mat-divider>
 
         <div class="comments-list" *ngIf="carpet.comments?.length">
           <h3>Comments</h3>

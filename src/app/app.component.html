@@ -1,23 +1,8 @@
+<div class="app-container">
+  <app-menu *ngIf="showMenu$ | async"></app-menu>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
 <div class="app-root-container"></div>
-<app-menu (selectedPage)="changePage($event)"></app-menu>
-@switch (page){
-  @case ("home"){
-    <app-home></app-home>
-  }
-  @case ("profile"){
-    <app-profile></app-profile>
-  }
-  @case ("carpets"){
-    <app-carpets></app-carpets>
-  }
-  @case ("login"){
-    <app-login></app-login>
-  }
-  @case ("register"){
-    <app-register></app-register>
-  }
-  @default {
-    <h1>Missing page</h1>
-  }
-}
 

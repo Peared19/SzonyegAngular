@@ -1,84 +1,99 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Firestore, collection, collectionData, doc, docData, query, where, getDocs, addDoc, DocumentData, CollectionReference } from '@angular/fire/firestore'; // Import Firestore modules and DocumentData
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Carpet } from '../models/carpet.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarpetService {
-  private carpets: Carpet[] = [
-    new Carpet({
-      id: '1',
-      name: 'Persian Royal',
-      description: 'Beautiful Persian carpet with traditional patterns.',
-      price: 249.99,
-      type: 'Persian',
-      imageUrl: 'assets/images/persian-royal.jpg',
-      inStock: true
-    }),
-    new Carpet({
-      id: '2',
-      name: 'Modern Geometric',
-      description: 'Contemporary carpet with bold geometric patterns.',
-      price: 129.99,
-      type: 'Modern',
-      imageUrl: 'assets/images/modern-geometric.jpg',
-      inStock: true
-    }),
-    new Carpet({
-      id: '3',
-      name: 'Traditional Style',
-      description: 'Classic carpet with elegant traditional design.',
-      price: 179.99,
-      type: 'Traditional',
-      imageUrl: 'assets/images/traditional.jpg',
-      inStock: true
-    }),
-    new Carpet({
-      id: '4',
-      name: 'Oriental Beauty',
-      description: 'Exquisite oriental carpet with intricate patterns.',
-      price: 299.99,
-      type: 'Oriental',
-      imageUrl: 'assets/images/oriental.jpg',
-      inStock: false
-    })
-  ];
 
-  constructor() { }
+  constructor(
+    private firestore: Firestore,
+    private storage: Storage
+  ) { }
 
   getAllCarpets(): Observable<Carpet[]> {
-    return of(this.carpets);
+    const carpetsCollection = collection(this.firestore, 'carpets');
+    return collectionData(carpetsCollection, { idField: 'id' }).pipe(
+      map(data => data as Carpet[])
+    );
   }
 
-  getFilteredCarpets(query = '', type = '', inStockOnly = false): Observable<Carpet[]> {
-    // Start with all carpets
-    let filtered = [...this.carpets];
+  getFilteredCarpets(searchQuery = '', type = ''): Observable<Carpet[]> {
+    const carpetsCollectionRef = collection(this.firestore, 'carpets');
+    let q = query(carpetsCollectionRef);
 
-    // Apply search query
-    if (query.trim() !== '') {
-      query = query.toLowerCase().trim();
-      filtered = filtered.filter(carpet =>
-        carpet.name.toLowerCase().includes(query) || 
-        carpet.description.toLowerCase().includes(query)
-      );
-    }
-
-    // Apply type filter
     if (type) {
-      filtered = filtered.filter(carpet => carpet.type === type);
+      q = query(q, where('type', '==', type));
     }
 
-    // Apply stock filter
-    if (inStockOnly) {
-      filtered = filtered.filter(carpet => carpet.inStock);
-    }
+    // Keep client-side filtering for search query
+    return collectionData(q, { idField: 'id' }).pipe(
+      map(carpetsData => {
+        let carpets = carpetsData as Carpet[];
 
-    return of(filtered);
+        if (searchQuery.trim() !== '') {
+          const queryLower = searchQuery.toLowerCase().trim();
+          carpets = carpets.filter(carpet =>
+            (carpet as any).name.toLowerCase().includes(queryLower) ||
+            (carpet as any).description.toLowerCase().includes(queryLower)
+          );
+        }
+        return carpets;
+      })
+    );
   }
 
   getCarpetById(id: string): Observable<Carpet | undefined> {
-    const carpet = this.carpets.find(c => c.id === id);
-    return of(carpet);
+    const carpetDocRef = doc(this.firestore, 'carpets', id);
+    return docData(carpetDocRef, { idField: 'id' }).pipe(
+      map(carpetData => (carpetData ? (carpetData as Carpet) : undefined))
+    );
+  }
+
+  async uploadCarpetImage(file: File): Promise<string> {
+    const filePath = `carpet_images/${Date.now()}_${file.name}`;
+    const storageRef = ref(this.storage, filePath);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          // Optional: observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+          console.error('Image upload failed:', error);
+          reject(error);
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            resolve(downloadURL);
+          }).catch(reject);
+        }
+      );
+    });
+  }
+
+  async addCarpet(carpet: Partial<Carpet>): Promise<void> {
+    const carpetsCollection = collection(this.firestore, 'carpets');
+    await addDoc(carpetsCollection, carpet);
   }
 }

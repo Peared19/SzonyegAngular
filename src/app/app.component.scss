@@ -1,1 +1,15 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #F9F6F1, #E7C9A9);
+  position: relative;
+  z-index: 1;
+}
 
+.main-content {
+  flex: 1;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}

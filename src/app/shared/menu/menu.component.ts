@@ -1,61 +1,64 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatLine } from '@angular/material/core';
-import { MenuService } from './menu.service';
-import { Subscription } from 'rxjs';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart.service';
+import { Observable } from 'rxjs';
+import { CartItem } from '../models/cart-item.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrl: './menu.component.scss',
   standalone: true,
   imports: [
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatSidenavModule,
     MatListModule,
-    MatLine
-  ]
+    RouterLink,
+    RouterLinkActive
+  ],
+  templateUrl: './menu.component.html',
+  styleUrl: './menu.component.scss'
 })
-export class MenuComponent implements OnInit, OnDestroy {
-  @Output() selectedPage: EventEmitter<string> = new EventEmitter();
-
+export class MenuComponent implements OnInit {
   isMenuOpen = false;
-  currentPage = 'home';
+  showMenu$: Observable<boolean> | undefined;
+  isLoggedIn$: Observable<boolean>;
+  cartItems$: Observable<CartItem[]>;
+  isAdmin = false;
 
-  private subscription!: Subscription;
-
-  constructor(private menuService: MenuService) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private cartService: CartService
+  ) {
+    this.isLoggedIn$ = this.authService.isAuthenticated();
+    this.cartItems$ = this.cartService.cartItems$;
+  }
 
   ngOnInit(): void {
-    this.subscription = this.menuService.action$.subscribe(action => {
-      if (action === 'toggleMenu') {
-        this.isMenuOpen = !this.isMenuOpen;
-      } else if (action.startsWith('setPage:')) {
-        const page = action.split(':')[1];
-        this.setPage(page);
+    this.authService.getCurrentUser().subscribe(firebaseUser => {
+      if (firebaseUser) {
+        this.authService.getUserData(firebaseUser.uid).subscribe(user => {
+          this.isAdmin = user?.role === 'admin';
+        });
+      } else {
+        this.isAdmin = false;
       }
     });
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  logout(): void {
+    this.authService.logout();
   }
 
-  setPage(pagename: string) {
-    this.currentPage = pagename;
-    this.selectedPage.emit(pagename);
-    this.isMenuOpen = false;
-  }
-
-  search(query: string): void {
-    if (query && query.trim()) {
-      console.log('Searching for:', query);
-    }
-  }
+  // Removed search method
 }

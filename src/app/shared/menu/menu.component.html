@@ -6,69 +6,96 @@
   <img src="assets/images/The_Rug_Hub_logo.png" id="logo" alt="logo">
   <span class="navbar-title">The Rug Hub</span>
 
-  <div class="navbar-spacer"></div>
+  <span class="navbar-spacer"></span>
 
   <div class="desktop-nav">
-    <a mat-button [class.active]="currentPage === 'home'" (click)="setPage('home')">
+    <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <mat-icon>home</mat-icon>
       <span>Home</span>
-    </a>
-    <a mat-button [class.active]="currentPage === 'carpets'" (click)="setPage('carpets')">
-      <mat-icon>dashboard</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/carpets" routerLinkActive="active">
+      <mat-icon>carpet</mat-icon>
       <span>Carpets</span>
-    </a>
-    <a mat-button [class.active]="currentPage === 'register'" (click)="setPage('register')">
+    </button>
+
+    <button mat-button routerLink="/cart" routerLinkActive="active" *ngIf="authService.isAuthenticated() | async">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Cart</span>
+      <span class="cart-badge" *ngIf="(cartItems$ | async)?.length">
+        {{ (cartItems$ | async)?.length || 0 }}
+      </span>
+    </button>
+
+    <button mat-button routerLink="/auth/register" routerLinkActive="active" *ngIf="!(authService.isAuthenticated() | async)">
       <mat-icon>person_add</mat-icon>
       <span>Register</span>
-    </a>
-    <a mat-button [class.active]="currentPage === 'login'" (click)="setPage('login')">
+    </button>
+
+    <button mat-button routerLink="/auth/login" routerLinkActive="active" *ngIf="!(authService.isAuthenticated() | async)">
       <mat-icon>login</mat-icon>
       <span>Login</span>
-    </a>
-    <a mat-button [class.active]="currentPage === 'profile'" (click)="setPage('profile')">
-      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <button mat-button routerLink="/profile" routerLinkActive="active" *ngIf="authService.isAuthenticated() | async">
+      <mat-icon>person</mat-icon>
       <span>Profile</span>
-    </a>
+    </button>
 
-    <div class="search-wrapper">
-      <input type="text" placeholder="Search carpets..." #searchInput (keyup.enter)="search(searchInput.value)" (click)="setPage('carpets')">
-      <button mat-icon-button (click)="search(searchInput.value)">
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
+    <button mat-button routerLink="/admin/add-carpet" routerLinkActive="active" *ngIf="isAdmin">
+      <mat-icon>add</mat-icon>
+      <span>Add Carpet</span>
+    </button>
   </div>
 
-  <div class="navbar-actions">
-    <!-- Optional actions like cart, search, etc. -->
-  </div>
+  <button mat-icon-button (click)="logout()" *ngIf="authService.isAuthenticated() | async">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 
-<!-- Mobile navigation menu -->
 <div class="mobile-nav-container" [class.open]="isMenuOpen">
   <mat-nav-list class="mobile-nav">
-    <div class="mobile-search-wrapper">
-      <input type="text" placeholder="Search carpets..." (click)="setPage('carpets')">
-    </div>
-
-    <a mat-list-item [class.active]="currentPage === 'home'" (click)="setPage('home')">
+    <a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="isMenuOpen = false">
       <mat-icon>home</mat-icon>
       <span mat-line>Home</span>
     </a>
-    <a mat-list-item [class.active]="currentPage === 'carpets'" (click)="setPage('carpets')">
-      <mat-icon>dashboard</mat-icon>
+
+    <a mat-list-item routerLink="/carpets" routerLinkActive="active" (click)="isMenuOpen = false">
+      <mat-icon>carpet</mat-icon>
       <span mat-line>Carpets</span>
     </a>
-    <a mat-list-item [class.active]="currentPage === 'register'" (click)="setPage('register')">
+
+    <a mat-list-item routerLink="/cart" routerLinkActive="active" (click)="isMenuOpen = false" *ngIf="authService.isAuthenticated() | async">
+      <mat-icon>shopping_cart</mat-icon>
+      <span mat-line>Cart</span>
+      <span class="cart-badge" *ngIf="(cartItems$ | async)?.length">
+        {{ (cartItems$ | async)?.length || 0 }}
+      </span>
+    </a>
+
+    <a mat-list-item routerLink="/auth/register" routerLinkActive="active" (click)="isMenuOpen = false" *ngIf="!(authService.isAuthenticated() | async)">
       <mat-icon>person_add</mat-icon>
       <span mat-line>Register</span>
     </a>
-    <a mat-list-item [class.active]="currentPage === 'login'" (click)="setPage('login')">
+
+    <a mat-list-item routerLink="/auth/login" routerLinkActive="active" (click)="isMenuOpen = false" *ngIf="!(authService.isAuthenticated() | async)">
       <mat-icon>login</mat-icon>
       <span mat-line>Login</span>
     </a>
-    <a mat-list-item [class.active]="currentPage === 'profile'" (click)="setPage('profile')">
-      <mat-icon>account_circle</mat-icon>
+
+    <a mat-list-item routerLink="/profile" routerLinkActive="active" (click)="isMenuOpen = false" *ngIf="authService.isAuthenticated() | async">
+      <mat-icon>person</mat-icon>
       <span mat-line>Profile</span>
+    </a>
+
+    <a mat-list-item routerLink="/add-carpet" routerLinkActive="active" (click)="isMenuOpen = false" *ngIf="isAdmin">
+      <mat-icon>add</mat-icon>
+      <span mat-line>Add Carpet</span>
+    </a>
+
+    <a mat-list-item (click)="logout(); isMenuOpen = false" *ngIf="authService.isAuthenticated() | async">
+      <mat-icon>logout</mat-icon>
+      <span mat-line>Logout</span>
     </a>
   </mat-nav-list>
 </div>

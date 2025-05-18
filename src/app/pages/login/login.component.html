@@ -1,41 +1,38 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header>
-      <mat-card-title>Log In</mat-card-title>
-      <mat-card-subtitle>Enter your credentials to access your account</mat-card-subtitle>
+      <mat-card-title>Bejelentkezés</mat-card-title>
     </mat-card-header>
-
     <mat-card-content>
-      <form class="login-form">
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput autocomplete="email"/>
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-hint>Enter your registered email</mat-hint>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email cím</mat-label>
+          <input matInput formControlName="email" type="email" required>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            Az email cím megadása kötelező
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            Kérjük, adjon meg érvényes email címet
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Password</mat-label>
-          <input  type="password" matInput autocomplete="current-password"/>
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-hint>Enter your password</mat-hint>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Jelszó</mat-label>
+          <input matInput formControlName="password" type="password" required>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            A jelszó megadása kötelező
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+            A jelszónak legalább 6 karakter hosszúnak kell lennie
+          </mat-error>
         </mat-form-field>
 
-        <div class="form-actions">
-          <mat-checkbox>Remember me</mat-checkbox>
-          <a class="forgot-password">Forgot password?</a>
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || isLoading">
+            {{ isLoading ? 'Bejelentkezés...' : 'Bejelentkezés' }}
+          </button>
         </div>
       </form>
     </mat-card-content>
-
-    <mat-card-actions>
-      <button mat-raised-button color="primary" class="login-button">
-        <mat-icon>login</mat-icon>
-        Log In
-      </button>
-      <div class="register-prompt">
-        Already have an account? <a (click)="callMenuMethod()">Register</a>
-      </div>
-    </mat-card-actions>
   </mat-card>
 </div>

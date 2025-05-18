@@ -9,6 +9,8 @@ $star-color: #ffd700;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  /* Temporary outline for debugging */
+  // outline: 1px solid red;
   
   h1 {
     text-align: center;
@@ -27,6 +29,8 @@ $star-color: #ffd700;
   border-radius: 8px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Temporary outline for debugging */
+  // outline: 1px solid blue;
   
   mat-form-field {
     flex: 1;
@@ -64,6 +68,8 @@ $star-color: #ffd700;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  /* Temporary outline for debugging */
+  // outline: 1px solid green;
   
   @media (min-width: 600px) {
     grid-template-columns: repeat(2, 1fr);

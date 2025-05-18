@@ -1,63 +1,75 @@
 <div class="profile-container">
   <mat-card class="profile-card">
     <mat-card-header>
-      <mat-card-title>Profile Information</mat-card-title>
-      <mat-card-subtitle>Manage your account details</mat-card-subtitle>
+      <mat-card-title>Profil adatok</mat-card-title>
     </mat-card-header>
-
     <mat-card-content>
-      <div class="user-info">
-        <h2>Personal Information</h2>
-        <p><strong>Name:</strong> {{user.fullName}}</p>
-        <p><strong>Username:</strong> {{user.username}}</p>
-        <p><strong>Email:</strong> {{user.email}}</p>
-        <p><strong>Phone:</strong> {{user.phoneNumber}}</p>
-        <p><strong>Current Address:</strong> {{user.address}}</p>
+
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
       </div>
 
-      <mat-divider></mat-divider>
+      <div *ngIf="!isLoading && user">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <div class="info-row">
+          <span class="label"><strong>Username:</strong></span>
+          <span>{{ user.username || 'Not set' }}</span>
+        </div>
 
-      <!-- Address Update Form -->
-      <div class="address-form">
-        <h2>Update Address</h2>
+        <mat-divider></mat-divider>
+
+        <h3>Lakcím</h3>
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>New Address</mat-label>
-          <input matInput [(ngModel)]="newAddress" placeholder="Enter your new address">
+          <mat-label>Lakcím</mat-label>
+          <textarea matInput [(ngModel)]="newAddress" rows="3"></textarea>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="updateAddress()">
-          <mat-icon>location_on</mat-icon>
-          Update Address
+
+        <button mat-raised-button color="primary" (click)="updateAddress()" [disabled]="isLoading || !newAddress.trim()">
+          Lakcím frissítése
         </button>
+
+        <mat-divider></mat-divider>
+
       </div>
 
-      <mat-divider></mat-divider>
-
-      <!-- Password Change Form -->
-      <div class="password-form">
-        <h2>Change Password</h2>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Current Password</mat-label>
-          <input matInput type="password" [(ngModel)]="passwordForm.currentPassword" placeholder="Enter current password">
-          <mat-icon matSuffix>lock</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>New Password</mat-label>
-          <input matInput type="password" [(ngModel)]="passwordForm.newPassword" placeholder="Enter new password">
-          <mat-icon matSuffix>lock</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Confirm New Password</mat-label>
-          <input matInput type="password" [(ngModel)]="passwordForm.confirmPassword" placeholder="Confirm new password">
-          <mat-icon matSuffix>lock</mat-icon>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" (click)="updatePassword()">
-          <mat-icon>key</mat-icon>
-          Change Password
-        </button>
+      <div *ngIf="!isLoading && orders.length > 0">
+        <h3>Rendeléseim</h3>
+        <div *ngFor="let order of orders" class="order-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Order #{{ order.id }}</mat-card-title>
+              <mat-card-subtitle>{{ order.createdAt | date:'medium' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div><strong>Total:</strong> {{ order.total | currency }}</div>
+              <table class="order-items-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of order.items">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price | currency }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+          </mat-card>
+          <mat-divider></mat-divider>
+        </div>
       </div>
+
+      <div *ngIf="!isLoading && !user" class="not-logged-in">
+        <p>Kérjük, jelentkezzen be a profil adatok megtekintéséhez.</p>
+        <!-- Optional: Add a login link -->
+        <!-- <a routerLink="/auth/login">Jelentkezzen be</a> -->
+      </div>
+
     </mat-card-content>
   </mat-card>
 </div>

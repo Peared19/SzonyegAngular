@@ -3,6 +3,72 @@
 
 @include mat.core();
 
+$primary-palette: (
+  50: #f5e6d3,
+  100: #e6c1a7,
+  200: #d5987a,
+  300: #c46f4d,
+  400: #b7512c,
+  500: #B45F06,
+  600: #a65705,
+  700: #934d04,
+  800: #804303,
+  900: #5d3202,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$accent-palette: (
+  50: #eceee9,
+  100: #d0d5c8,
+  200: #b1b9a4,
+  300: #929d80,
+  400: #7a8865,
+  500: #5C614E,
+  600: #545947,
+  700: #4a4f3d,
+  800: #414535,
+  900: #303325,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$theme-primary: mat.m2-define-palette($primary-palette);
+$theme-accent: mat.m2-define-palette($accent-palette);
+$theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$theme: mat.m2-define-light-theme((
+  color: (
+    primary: $theme-primary,
+    accent: $theme-accent,
+    warn: $theme-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($theme);
+
 $primary-color: #B45F06;
 $secondary-color: #E7C9A9;
 $accent-color: #5C614E;
@@ -15,13 +81,14 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: $text-dark;
+  color: #2E2E2E;
   overflow-x: hidden;
+  background: linear-gradient(135deg, #F9F6F1, #E7C9A9);
 }
 
 .app-root-container {
@@ -169,6 +236,7 @@ a {
   color: $primary-color;
 }
 
+// Jelölőnégyzetek stílusai
 .mat-checkbox-checked.mat-primary .mat-checkbox-background {
   background-color: $primary-color;
 }
