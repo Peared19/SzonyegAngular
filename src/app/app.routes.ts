@@ -12,8 +12,8 @@ export const routes: Routes = [
     path: 'carpets',
     loadComponent: () => import('./pages/carpets/carpets.component').then(m => m.CarpetsComponent).catch(err => {
       console.error('Error loading CarpetsComponent:', err);
-      // You might want to redirect to an error page or display a message
-      throw err; // Re-throw the error so it's not silently swallowed
+
+      throw err;
     })
   },
   {

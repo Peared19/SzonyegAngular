@@ -4,7 +4,7 @@ import { Firestore, doc, setDoc, collection, getDoc, DocumentSnapshot } from '@a
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { User } from '../models/user.model'; // Import the local User model
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -98,4 +98,4 @@ export class AuthService {
       throw error;
     }
   }
-} 
+}

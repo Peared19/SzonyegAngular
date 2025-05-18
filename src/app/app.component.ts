@@ -19,6 +19,7 @@ import { map, filter } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   showMenu$: Observable<boolean>;
+  title = 'AngularSzonyeg';
 
   constructor(
     private authService: AuthService,
@@ -29,8 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // The router configuration in app.routes.ts handles the default redirection
-    // No need for manual navigation here unless specific conditions require it.
+
   }
 }
 

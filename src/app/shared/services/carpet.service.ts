@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Firestore, collection, collectionData, doc, docData, query, where, getDocs, addDoc, DocumentData, CollectionReference } from '@angular/fire/firestore'; // Import Firestore modules and DocumentData
+import { Firestore, collection, collectionData, doc, docData, query, where, getDocs, addDoc, DocumentData, CollectionReference } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Carpet } from '../models/carpet.model';
 
@@ -30,7 +30,6 @@ export class CarpetService {
       q = query(q, where('type', '==', type));
     }
 
-    // Keep client-side filtering for search query
     return collectionData(q, { idField: 'id' }).pipe(
       map(carpetsData => {
         let carpets = carpetsData as Carpet[];
@@ -62,8 +61,6 @@ export class CarpetService {
     return new Promise((resolve, reject) => {
       uploadTask.on('state_changed',
         (snapshot) => {
-          // Optional: observe state change events such as progress, pause, and resume
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log('Upload is ' + progress + '% done');
           switch (snapshot.state) {

@@ -1,6 +1,3 @@
-/**
- * szonyeg modell
- */
 export class Carpet {
   id: string;
   name: string;

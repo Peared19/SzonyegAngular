@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Firestore, collection, query, where, getDocs, addDoc, DocumentData, CollectionReference } from '@angular/fire/firestore';
-import { Comment } from '../models/comment.model';
-import { Rating } from '../models/rating.model';
-import { AuthService } from './auth.service';
+import { Comment } from '../../../shared/models/comment.model';
+import { Rating } from '../../../shared/models/rating.model';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +63,7 @@ export class FeedbackService {
   }
 
   async addRating(carpetId: string, score: number): Promise<void> {
-    const firebaseAuthUser = await this.authService.getCurrentUser().pipe(map(user => user)).toPromise(); // Get Firebase Auth user as Promise
+    const firebaseAuthUser = await this.authService.getCurrentUser().pipe(map(user => user)).toPromise();
 
     if (!firebaseAuthUser) {
       throw new Error('User not authenticated');
@@ -72,7 +72,7 @@ export class FeedbackService {
     const newRating: Partial<Rating & DocumentData> = {
       carpetId: carpetId,
       userId: firebaseAuthUser.uid,
-      username: firebaseAuthUser.email || 'Anonymous', // Use email from Firebase Auth user, fallback to Anonymous
+      username: firebaseAuthUser.email || 'Anonymous',
       score: score,
       createdAt: new Date()
     };

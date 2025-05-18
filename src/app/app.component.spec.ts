@@ -19,11 +19,10 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('AngularSzonyeg');
   });
-
-  it('should render title', () => {
+  it('should render the app container', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, AngularSzonyeg');
+    expect(compiled.querySelector('.app-container')).toBeTruthy();
   });
 });

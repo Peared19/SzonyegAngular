@@ -1,6 +1,4 @@
-/**
- * felhasznalo modell
- */
+
 export class User {
   id: string;
   username: string;
@@ -8,7 +6,7 @@ export class User {
   address: string;
   role: 'user' | 'admin';
   createdAt: Date;
-  
+
   constructor(data: Partial<User> = {}) {
     this.id = data.id || '';
     this.username = data.username || '';
@@ -21,4 +19,4 @@ export class User {
   get isAdmin(): boolean {
     return this.role === 'admin';
   }
-} 
+}

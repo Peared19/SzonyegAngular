@@ -1,6 +1,4 @@
-/**
- * ertekeles modell a szonyegekhez
- */
+
 export interface Rating {
   id: string;
   carpetId: string;
@@ -18,7 +16,7 @@ export class Rating {
   username: string;
   score: number; // 1-5 stars
   createdAt: Date;
-  
+
   constructor(data: Partial<Rating> = {}) {
     this.id = data.id || '';
     this.carpetId = data.carpetId || '';
@@ -35,4 +33,4 @@ export class Rating {
   get stars(): string {
     return '★'.repeat(this.score) + '☆'.repeat(5 - this.score);
   }
-} 
+}

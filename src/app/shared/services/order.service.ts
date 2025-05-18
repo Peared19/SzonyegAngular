@@ -10,14 +10,20 @@ export class OrderService {
   constructor(private firestore: Firestore) {
     this.ordersCollection = collection(this.firestore, 'orders');
   }
-
   async placeOrder(order: Order): Promise<void> {
     await addDoc(this.ordersCollection, order);
   }
-
+  
   async getOrdersByUserId(userId: string): Promise<Order[]> {
     const q = query(this.ordersCollection, where('userId', '==', userId));
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Order));
+    return querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      return { 
+        id: doc.id, 
+        ...data,
+        createdAt: data['createdAt']?.toDate ? data['createdAt'].toDate() : new Date()
+      } as Order;
+    });
   }
 } 

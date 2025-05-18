@@ -59,8 +59,25 @@ $breakpoint-desktop: 1024px;
     }
   }
 
-  mat-card-content {
+  mat-card-content { 
     padding: 2rem;
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .button-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1rem;
+      }
+    }
+    
+    .full-width {
+      width: 100%;
+    }
   }
 
   .register-form {

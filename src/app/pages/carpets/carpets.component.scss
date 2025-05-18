@@ -1,4 +1,4 @@
-// Basic color variables
+
 $primary: #B45F06;
 $accent: #5C614E;
 $error: #c62828;
@@ -9,9 +9,8 @@ $star-color: #ffd700;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  /* Temporary outline for debugging */
-  // outline: 1px solid red;
-  
+
+
   h1 {
     text-align: center;
     color: $primary;
@@ -29,14 +28,13 @@ $star-color: #ffd700;
   border-radius: 8px;
   margin-bottom: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  /* Temporary outline for debugging */
-  // outline: 1px solid blue;
-  
+
+
   mat-form-field {
     flex: 1;
     min-width: 150px;
   }
-  
+
   .filter-buttons {
     display: flex;
     gap: 0.5rem;
@@ -54,7 +52,7 @@ $star-color: #ffd700;
   padding: 3rem;
   background: $background;
   border-radius: 8px;
-  
+
   mat-icon {
     font-size: 3rem;
     height: 3rem;
@@ -68,46 +66,45 @@ $star-color: #ffd700;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  /* Temporary outline for debugging */
-  // outline: 1px solid green;
-  
+
+
   @media (min-width: 600px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   @media (min-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   mat-card {
     display: flex;
     flex-direction: column;
-    
+
     img {
       height: 180px;
       object-fit: cover;
     }
-    
+
     mat-card-content {
       padding: 1rem;
       flex: 1;
-      
+
       h2 {
         color: $primary;
         margin-bottom: 0.5rem;
       }
-      
+
       .type {
         color: $accent;
         font-size: 0.9rem;
       }
-      
+
       .price {
         font-weight: bold;
         color: $primary;
         margin-top: 1rem;
       }
-      
+
       .out-of-stock {
         color: $error;
         font-weight: bold;
@@ -115,12 +112,12 @@ $star-color: #ffd700;
 
       .rating-summary {
         margin: 0.5rem 0;
-        
+
         .stars {
           color: $star-color;
           font-size: 1.2rem;
         }
-        
+
         .rating-count {
           color: $accent;
           font-size: 0.9rem;
@@ -128,10 +125,10 @@ $star-color: #ffd700;
         }
       }
     }
-    
+
     mat-card-actions {
       padding: 1rem;
-      
+
       button {
         width: 100%;
       }
@@ -139,7 +136,7 @@ $star-color: #ffd700;
 
     mat-expansion-panel {
       margin-top: 1rem;
-      
+
       .add-rating,
       .add-comment {
         margin: 1rem 0;

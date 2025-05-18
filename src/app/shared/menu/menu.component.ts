@@ -60,5 +60,4 @@ export class MenuComponent implements OnInit {
     this.authService.logout();
   }
 
-  // Removed search method
 }
